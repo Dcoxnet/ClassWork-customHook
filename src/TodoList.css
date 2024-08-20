@@ -1,0 +1,10 @@
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+ul li {
+  display: flex;
+  justify-content: space-between;
+}
