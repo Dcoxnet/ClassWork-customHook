@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function AddTodo({ onNewTodo }) {
   const [todo, setTodo] = useState("");
-
   function handleSubmit(e) {
     e.preventDefault();
 

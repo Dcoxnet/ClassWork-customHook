@@ -8,7 +8,7 @@ export function TodoList({ todos, finishTodo }) {
         {todos.map((el, index) => {
           return (
             <li>
-              <div>{el.name}</div>
+              <div>{el.title}</div>
               <button
                 onClick={() => {
                   finishTodo(index);

@@ -2,16 +2,21 @@ import { AddTodo } from "./AddTodo";
 import { TodoList } from "./TodoList";
 
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [todos, setTodos] = useState([]);
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((res) => res.json())
+      .then((data) => setTodos(data));
+  }, []);
 
   function addTodo(todo) {
     setTodos([
       ...todos,
       {
-        name: todo,
+        title: todo,
       },
     ]);
   }
