@@ -1,40 +1,53 @@
-import { AddTodo } from "./AddTodo";
-import { TodoList } from "./TodoList";
+import useForm from "./components/useForm";
 
-import "./App.css";
-import { useEffect, useState } from "react";
+function FormComponent() {
+  const { values, handleChange, resetForm } = useForm({
+    username: "",
+    email: "",
+    password: "",
+  });
 
-function App() {
-  const [todos, setTodos] = useState([]);
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((res) => res.json())
-      .then((data) => setTodos(data));
-  }, []);
-
-  function addTodo(todo) {
-    setTodos([
-      ...todos,
-      {
-        title: todo,
-      },
-    ]);
-  }
-
-  function removeTodo(todoIndex) {
-    const newTodos = [...todos];
-
-    newTodos.splice(todoIndex, 1);
-
-    setTodos(newTodos);
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Form values:", values);
+    resetForm();
+  };
 
   return (
-    <main className="App">
-      <AddTodo onNewTodo={addTodo} />
-      <TodoList todos={todos} finishTodo={removeTodo} />
-    </main>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input
+          type="text"
+          name="username"
+          value={values.username}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div>
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={values.email}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div>
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={values.password}
+          onChange={handleChange}
+        />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
   );
 }
 
-export default App;
+export default FormComponent;
